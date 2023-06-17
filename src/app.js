@@ -1,5 +1,6 @@
 function App({ $target, initialState }) {
   // new 방어 코드 추가
+
   if (!new.target) {
     throw new Error('함수 또는 생성자에 new를 붙여주세요!');
   }
