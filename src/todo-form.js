@@ -1,4 +1,7 @@
 function TodoForm({ $target, onSubmit }) {
+  if (!new.target) {
+    throw new Error('함수 또는 생성자에 new를 붙여주세요!');
+  }
   const $form = document.createElement('form');
   $target.appendChild($form);
   let isInit = false;
