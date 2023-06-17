@@ -1,4 +1,8 @@
 function App({ $target, initialState }) {
+  if (!new.target) {
+    throw new Error('함수 또는 생성자에 new를 붙여주세요!');
+  }
+
   new Header({
     $target,
     text: 'Simple Todo List',
