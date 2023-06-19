@@ -17,17 +17,33 @@ export default function App({ $target, initialState }) {
 
   new TodoForm({
     $target,
-    onSubmit: (text) => {
-      const nextState = [...todoList.state, { text }];
+    onSubmit: ({ text, isCompleted }) => {
+      const nextState = [
+        ...todoList.state,
+        { text, id: todoList.state.length + 1, isCompleted },
+      ];
       todoList.setState(nextState);
       setItem('todos', JSON.stringify(nextState));
+      //todoCount.setState(nextState);
     },
   });
 
   const todoList = new TodoList({
     $target,
     initialState,
+    onClick: ({ index }) => {
+      const nextState = [...todoList.state];
+      nextState[index].isCompleted = !nextState[index].isCompleted;
+      todoList.setState(nextState);
+      setItem('todos', JSON.stringify(nextState));
+      //todoCount.setState(nextState);
+    },
   });
+
+  // const todoCount = new TodoCount({
+  //   $target,
+  //   initialState,
+  // });
 }
 
 /*
