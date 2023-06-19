@@ -39,8 +39,8 @@ export default function TodoList({ $target, initialState }) {
       .join('')}</ul>`;
 
     const $removeBtns = document.querySelectorAll('.remove');
-    $removeBtns.forEach(($list) => {
-      $list.addEventListener('click', (e) => {
+    $removeBtns.forEach((list) => {
+      list.addEventListener('click', (e) => {
         const index = parseInt(e.target.dataset.index);
         this.removeTodoList(index);
       });
