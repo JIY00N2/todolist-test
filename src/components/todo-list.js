@@ -19,6 +19,12 @@ export default function TodoList({ $target, initialState }) {
     this.render();
   };
 
+  this.removeTodoList = (index) => {
+    // 클릭한 index에 해당하는 항목을 state에서 제거합니다.
+    this.state.splice(index, 1);
+    this.render();
+  };
+
   this.render = () => {
     // this.state =[{text: '자바스크립트 공부하기'}, {text:'...'}]
     // map을 돈 이후에는 아래처럼 만들어짐
@@ -26,8 +32,19 @@ export default function TodoList({ $target, initialState }) {
     // join을 거치면
     // <li> 자바스크립트 공부하기</li>,<li>...</li>
     $todoList.innerHTML = `<ul>${this.state
-      .map(({ text }) => `<li>${text}</li>`)
+      .map(
+        ({ text }, index) =>
+          `<li>${text}<button class="remove" data-index="${index}">❌</button></li>`
+      )
       .join('')}</ul>`;
+
+    const $removeBtns = document.querySelectorAll('.remove');
+    $removeBtns.forEach(($list) => {
+      $list.addEventListener('click', (e) => {
+        const index = parseInt(e.target.dataset.index);
+        this.removeTodoList(index);
+      });
+    });
   };
   this.render();
 }
