@@ -1,3 +1,4 @@
+import todoValidation from '../utils/validation.js';
 // params.$target - 해당 컴포넌트가 추가가 될 DOM element
 // params.initialState - 해당 컴포넌트의 초기 상태
 export default function TodoList({ $target, initialState }) {
@@ -8,20 +9,6 @@ export default function TodoList({ $target, initialState }) {
   // $를 붙여서 todoList에는 dom이 들어있다는 것을 명시
   const $todoList = document.createElement('div');
   $target.appendChild($todoList);
-
-  // 유효성 검사 부분
-  const todoValidation = (todos) => {
-    if (!Array.isArray(todos)) {
-      throw new Error('todos는 배열로 입력해주세요!');
-    }
-    if (
-      !todos.every(
-        (item) => typeof item === 'object' && item.hasOwnProperty('text')
-      )
-    ) {
-      throw new Error('todo의 요소는 객체이고 text 속성을 갖져야 합니다.');
-    }
-  };
 
   todoValidation(initialState);
   this.state = initialState;

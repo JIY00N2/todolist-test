@@ -1,7 +1,7 @@
-import Header from './header.js';
-import TodoForm from './todo-form.js';
-import TodoList from './todo-list.js';
-import { setItem } from './storage.js';
+import Header from './components/header.js';
+import TodoForm from './components/todo-form.js';
+import TodoList from './components/todo-list.js';
+import { setItem } from './utils/storage.js';
 
 export default function App({ $target, initialState }) {
   // new 방어 코드 추가
