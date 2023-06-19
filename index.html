@@ -7,13 +7,6 @@
   </head>
   <body>
     <main class="app"></main>
-    <!-- 스크립트 불러오는 순서가 중요하다.
-    main.js에서 TodoList를 쓰고 있기 때문에 TodoList를 먼저 불러옴 -->
-    <script src="./src/storage.js"></script>
-    <script src="./src/header.js"></script>
-    <script src="./src/todo-form.js"></script>
-    <script src="./src/todo-list.js"></script>
-    <script src="./src/app.js"></script>
-    <script src="./src/main.js"></script>
+    <script src="./src/main.js" type="module"></script>
   </body>
 </html>
