@@ -1,4 +1,9 @@
-function App({ $target, initialState }) {
+import Header from './header.js';
+import TodoForm from './todo-form.js';
+import TodoList from './todo-list.js';
+import { setItem } from './storage.js';
+
+export default function App({ $target, initialState }) {
   // new 방어 코드 추가
 
   if (!new.target) {
@@ -15,9 +20,10 @@ function App({ $target, initialState }) {
     onSubmit: (text) => {
       const nextState = [...todoList.state, { text }];
       todoList.setState(nextState);
-      storage.setItem('todos', JSON.stringify(nextState));
+      setItem('todos', JSON.stringify(nextState));
     },
   });
+
   const todoList = new TodoList({
     $target,
     initialState,
