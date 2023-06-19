@@ -1,4 +1,4 @@
-function TodoForm({ $target, onSubmit }) {
+export default function TodoForm({ $target, onSubmit }) {
   if (!new.target) {
     throw new Error('함수 또는 생성자에 new를 붙여주세요!');
   }
@@ -13,7 +13,6 @@ function TodoForm({ $target, onSubmit }) {
     if (!isInit) {
       $form.addEventListener('submit', (e) => {
         e.preventDefault();
-
         const $todo = $form.querySelector('input[name=todo]');
         const text = $todo.value;
         if (text.length > 1) {
