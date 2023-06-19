@@ -1,8 +1,8 @@
 import todoValidation from '../utils/validation.js';
-import { getItem, setItem } from '../utils/storage.js';
+import { setItem } from '../utils/storage.js';
 // params.$target - 해당 컴포넌트가 추가가 될 DOM element
 // params.initialState - 해당 컴포넌트의 초기 상태
-export default function TodoList({ $target, initialState, onClick }) {
+export default function TodoList({ $target, initialState, onClick, onDelete }) {
   if (!new.target) {
     throw new Error('함수 또는 생성자에 new를 붙여주세요!');
   }
@@ -20,15 +20,15 @@ export default function TodoList({ $target, initialState, onClick }) {
     this.render();
   };
 
-  // const todolists = JSON.parse(localStorage.getItem('todos'));
-  // console.log(todolists);
-  // delete todolists[0];
-  // localStorage.setItem('todolists', JSON.stringify(todolists));
-
   // this.removeTodoList = (index) => {
-  //   // 클릭한 index에 해당하는 항목을 state에서 제거합니다.
-  //   this.state.splice(index, 1);
+  //   const nextState = this.state.filter((_, i) => i !== index);
+  //   this.state = nextState;
+  //   this.updateLocalStorage();
   //   this.render();
+  // };
+
+  // this.updateLocalStorage = () => {
+  //   setItem('todos', JSON.stringify(this.state));
   // };
 
   this.render = () => {
@@ -40,17 +40,27 @@ export default function TodoList({ $target, initialState, onClick }) {
     $todoList.innerHTML = `<ul>${this.state
       .map(({ text, isCompleted }, index) =>
         isCompleted
-          ? `<li data-index = '${index}'><del>${text}</del></li>`
-          : `<li data-index = '${index}'>${text}</li>`
+          ? `<li data-index = '${index}'><del>${text}</del></li><button data-index="${index}">❌</button>
+          `
+          : `<li data-index = '${index}'>${text}</li><button class="delete-button" data-index="${index}">❌</button>
+          `
       )
       .join('')}</ul>`;
-
+    // 취소선
     const $liTodolists = $todoList.querySelectorAll('li');
     $liTodolists.forEach(($li) => {
       $li.addEventListener('click', (e) => {
         const { index } = e.currentTarget.dataset;
-        console.log({ index });
         onClick({ index });
+      });
+    });
+    // 삭제
+    const $deleteBtns = $todoList.querySelectorAll('.delete-button');
+    $deleteBtns.forEach(($button) => {
+      $button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const { index } = e.target.dataset;
+        onDelete({ index });
       });
     });
   };

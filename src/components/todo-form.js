@@ -15,9 +15,10 @@ export default function TodoForm({ $target, onSubmit }) {
         e.preventDefault();
         const $todo = $form.querySelector('input[name=todo]');
         const text = $todo.value;
+        let isCompleted = false;
         if (text.length > 1) {
           $todo.value = '';
-          onSubmit(text);
+          onSubmit({ text, isCompleted });
         }
       });
       isInit = true;

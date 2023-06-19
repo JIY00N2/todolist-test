@@ -20,11 +20,10 @@ export default function App({ $target, initialState }) {
     onSubmit: ({ text, isCompleted }) => {
       const nextState = [
         ...todoList.state,
-        { text, id: todoList.state.length + 1, isCompleted },
+        { id: todoList.state.length + 1, text, isCompleted },
       ];
       todoList.setState(nextState);
       setItem('todos', JSON.stringify(nextState));
-      //todoCount.setState(nextState);
     },
   });
 
@@ -34,11 +33,30 @@ export default function App({ $target, initialState }) {
     onClick: ({ index }) => {
       const nextState = [...todoList.state];
       nextState[index].isCompleted = !nextState[index].isCompleted;
-      todoList.setState(nextState);
       setItem('todos', JSON.stringify(nextState));
-      //todoCount.setState(nextState);
+      todoList.setState(nextState);
+    },
+    onDelete: ({ index }) => {
+      const nextState = [...todoList.state];
+      nextState.splice(index, 1);
+      setItem('todos', JSON.stringify(nextState));
+      todoList.setState(nextState);
     },
   });
+
+  // const deleteTodoItem = (index) => {
+  //   const nextState = [...todoList.state];
+  //   nextState.splice(index, 1);
+  //   setItem('todos', JSON.stringify(nextState));
+  //   todoList.setState(nextState);
+  // };
+
+  // $target.addEventListener('click', (e) => {
+  //   if (e.target.matches('button[data-index]')) {
+  //     const index = parseInt(e.target.dataset.index);
+  //     deleteTodoItem(index);
+  //   }
+  // });
 
   // const todoCount = new TodoCount({
   //   $target,
