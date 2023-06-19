@@ -1,4 +1,7 @@
-const initialState = storage.getItem('todos', []);
+import App from './app.js';
+import { getItem } from './utils/storage.js';
+
+const initialState = getItem('todos', []);
 
 const $app = document.querySelector('.app');
 
