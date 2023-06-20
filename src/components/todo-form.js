@@ -7,8 +7,8 @@ export default function TodoForm({ $target, onSubmit }) {
   let isInit = false;
   this.render = () => {
     $form.innerHTML = `
-    <input type='text' name='todo'/>
-    <button>Add</button>
+    <input class="todo-form" type='text' name='todo'/>
+    <button class="add-button">Add</button>
     `;
     if (!isInit) {
       $form.addEventListener('submit', (e) => {
@@ -16,9 +16,11 @@ export default function TodoForm({ $target, onSubmit }) {
         const $todo = $form.querySelector('input[name=todo]');
         const text = $todo.value;
         let isCompleted = false;
-        if (text.length >= 1) {
+        if (text.length >= 1 && text.length <= 15) {
           $todo.value = '';
           onSubmit({ text, isCompleted });
+        } else {
+          alert('글자수의 길이는 1이상 15이하로 입력해주세요!');
         }
       });
       isInit = true;

@@ -5,6 +5,7 @@ export default function TodoCount({ $target, initialState }) {
     throw new Error('함수 또는 생성자에 new를 붙여주세요!');
   }
   const $todoCount = document.createElement('div');
+  $todoCount.classList.add('todo-count');
   $target.appendChild($todoCount);
 
   todoValidation(initialState);
@@ -21,7 +22,7 @@ export default function TodoCount({ $target, initialState }) {
     let completedTodoCount = this.state.filter(
       ({ isCompleted }) => isCompleted
     ).length;
-    $todoCount.innerHTML = `완료된 Todo: ${completedTodoCount} / 전체 Todo: ${totalTodoCount} `;
+    $todoCount.innerHTML = `완료: ${completedTodoCount} / 전체: ${totalTodoCount} `;
   };
 
   this.render();

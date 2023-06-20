@@ -8,6 +8,7 @@ export default function TodoList({ $target, initialState, onClick, onDelete }) {
 
   // $를 붙여서 todoList에는 dom이 들어있다는 것을 명시
   const $todoList = document.createElement('div');
+  $todoList.classList.add('todo-list');
   $target.appendChild($todoList);
 
   todoValidation(initialState);
@@ -28,9 +29,9 @@ export default function TodoList({ $target, initialState, onClick, onDelete }) {
     $todoList.innerHTML = `<ul>${this.state
       .map(({ text, isCompleted }, index) =>
         isCompleted
-          ? `<li data-index = '${index}'><del>${text}</del></li><button class="delete-button" data-index="${index}">❌</button>
+          ? `<div class= 'todo'><li data-index = '${index}'><del>${text}</del></li><button class="delete-button" data-index="${index}">❌</button></div>
           `
-          : `<li data-index = '${index}'>${text}</li><button class="delete-button" data-index="${index}">❌</button>
+          : `<div class= 'todo'><li data-index = '${index}'>${text}</li><button class="delete-button" data-index="${index}">❌</button></div>
           `
       )
       .join('')}</ul>`;
