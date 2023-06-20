@@ -1,6 +1,7 @@
 import Header from './components/header.js';
 import TodoForm from './components/todo-form.js';
 import TodoList from './components/todo-list.js';
+import TodoCount from './components/todo-count.js';
 import { setItem } from './utils/storage.js';
 
 export default function App({ $target, initialState }) {
@@ -18,12 +19,10 @@ export default function App({ $target, initialState }) {
   new TodoForm({
     $target,
     onSubmit: ({ text, isCompleted }) => {
-      const nextState = [
-        ...todoList.state,
-        { id: todoList.state.length + 1, text, isCompleted },
-      ];
+      const nextState = [...todoList.state, { text, isCompleted }];
       todoList.setState(nextState);
       setItem('todos', JSON.stringify(nextState));
+      todoCount.setState(nextState);
     },
   });
 
@@ -35,33 +34,21 @@ export default function App({ $target, initialState }) {
       nextState[index].isCompleted = !nextState[index].isCompleted;
       setItem('todos', JSON.stringify(nextState));
       todoList.setState(nextState);
+      todoCount.setState(nextState);
     },
     onDelete: ({ index }) => {
       const nextState = [...todoList.state];
       nextState.splice(index, 1);
       setItem('todos', JSON.stringify(nextState));
       todoList.setState(nextState);
+      todoCount.setState(nextState);
     },
   });
 
-  // const deleteTodoItem = (index) => {
-  //   const nextState = [...todoList.state];
-  //   nextState.splice(index, 1);
-  //   setItem('todos', JSON.stringify(nextState));
-  //   todoList.setState(nextState);
-  // };
-
-  // $target.addEventListener('click', (e) => {
-  //   if (e.target.matches('button[data-index]')) {
-  //     const index = parseInt(e.target.dataset.index);
-  //     deleteTodoItem(index);
-  //   }
-  // });
-
-  // const todoCount = new TodoCount({
-  //   $target,
-  //   initialState,
-  // });
+  const todoCount = new TodoCount({
+    $target,
+    initialState,
+  });
 }
 
 /*
