@@ -3,7 +3,7 @@ import todoValidation from '../utils/validation.js';
 // params.initialState - 해당 컴포넌트의 초기 상태
 export default function TodoList({ $target, initialState, onClick, onDelete }) {
   if (!new.target) {
-    throw new Error('함수 또는 생성자에 new를 붙여주세요!');
+    throw new Error('컴포넌트에 new를 붙여주세요!');
   }
 
   // $를 붙여서 todoList에는 dom이 들어있다는 것을 명시
@@ -39,7 +39,7 @@ export default function TodoList({ $target, initialState, onClick, onDelete }) {
     const $liTodolists = $todoList.querySelectorAll('li');
     $liTodolists.forEach(($li) => {
       $li.addEventListener('click', (e) => {
-        const { index } = e.currentTarget.dataset;
+        const { index } = e.target.dataset;
         onClick({ index });
       });
     });

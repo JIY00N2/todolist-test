@@ -2,7 +2,7 @@ import todoValidation from '../utils/validation.js';
 
 export default function TodoCount({ $target, initialState }) {
   if (!new.target) {
-    throw new Error('함수 또는 생성자에 new를 붙여주세요!');
+    throw new Error('컴포넌트에 new를 붙여주세요!');
   }
   const $todoCount = document.createElement('div');
   $todoCount.classList.add('todo-count');

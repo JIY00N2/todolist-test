@@ -1,6 +1,6 @@
 export default function TodoForm({ $target, onSubmit }) {
   if (!new.target) {
-    throw new Error('함수 또는 생성자에 new를 붙여주세요!');
+    throw new Error('컴포넌트에 new를 붙여주세요!');
   }
   const $form = document.createElement('form');
   $target.appendChild($form);
@@ -15,10 +15,9 @@ export default function TodoForm({ $target, onSubmit }) {
         e.preventDefault();
         const $todo = $form.querySelector('input[name=todo]');
         const text = $todo.value;
-        let isCompleted = false;
         if (text.length >= 1 && text.length <= 15) {
           $todo.value = '';
-          onSubmit({ text, isCompleted });
+          onSubmit({ text, isCompleted: false });
         } else {
           alert('글자수의 길이는 1이상 15이하로 입력해주세요!');
         }
