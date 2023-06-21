@@ -39,7 +39,7 @@ export default function TodoList({ $target, initialState, onClick, onDelete }) {
     const $liTodolists = $todoList.querySelectorAll('li');
     $liTodolists.forEach(($li) => {
       $li.addEventListener('click', (e) => {
-        const { index } = e.target.dataset;
+        const { index } = e.currentTarget.dataset;
         onClick({ index });
       });
     });

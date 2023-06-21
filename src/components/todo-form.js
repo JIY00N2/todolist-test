@@ -4,7 +4,9 @@ export default function TodoForm({ $target, onSubmit }) {
   }
   const $form = document.createElement('form');
   $target.appendChild($form);
+
   let isInit = false;
+
   this.render = () => {
     $form.innerHTML = `
     <input class="todo-form" type='text' name='todo'/>
